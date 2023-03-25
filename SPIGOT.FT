@@ -1,0 +1,70 @@
+C     PROGRAM SPIGOT
+C
+      EXTERNAL PRTDIG
+C
+C --- IF MORE THAN ABOUT 250 DIGITS ARE NEEDED
+C     YOU MUST USE INTEGER*4 FOR Q, X, AND A
+C
+      INTEGER IX,I,J,K,L,N,N9,PD
+      INTEGER Q,X
+C
+C --- THE 'A' TABLE SHOULD BE DIMENSIONED FOR 10*N/3+1
+C
+      INTEGER A(334)
+C
+C --- GENERAL GLOBAL INITIALIZATIONS
+C
+      WRITE(4,1)
+    1 FORMAT(1X,'SPIGOT PDP-8 FORTRAN IV -- BUILD 230325.1230')
+
+      N=100
+      L=(10*N/3)+1
+      DO 1000 I=1,L
+        A(I)=2
+ 1000 CONTINUE
+C
+C --- MAJOR LOOP
+C
+      DO 1100 J=1,N
+        Q=0
+        DO 1050 IX=1,L
+          I=L-IX+1
+          X=10*A(I)+Q*I
+          A(I)=MOD(X,2*I-1)
+          Q=X/(2*I-1)
+ 1050   CONTINUE
+        A(1)=MOD(Q,10)
+        Q=Q/10
+
+        IF (Q.EQ.9) GOTO 1060
+        IF (Q.EQ.10) GOTO 1070
+
+C --- Q<>9 AND Q<>10
+        CALL PRTDIG(PD)
+        PD=Q
+        IF (N9.EQ.0) GOTO 1100
+        DO 1055 K=1,N9
+          CALL PRTDIG(9)
+ 1055   CONTINUE
+        N9=0
+        GOTO 1100
+
+C --- Q=9
+ 1060   N9=N9+1
+        GOTO 1100
+
+C --- Q=10
+ 1070   CALL PRTDIG(PD+1)
+        IF (N9.EQ.0) GOTO 1075
+        DO 1075 K=1,N9
+          CALL PRTDIG(0)
+ 1075   CONTINUE
+        PD=0
+        N9=0
+        GOTO 1100
+
+ 1100 CONTINUE
+
+      CALL PRTDIG(PD)
+
+      END

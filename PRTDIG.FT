@@ -1,0 +1,10 @@
+      SUBROUTINE PRTDIG(D)
+      INTEGER D
+
+      WRITE(4,5000) D
+      WRITE(3,5000) D
+ 5000 FORMAT(1X,I1)
+
+      RETURN
+
+      END
