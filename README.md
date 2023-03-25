@@ -6,12 +6,12 @@ Written in DEC FORTRAN IV for use in DEC OS/8 on a PDP-8 (real or emulated).
 The FORTRAN IV code is essentially a 1-1 port of the Pascal program presented by Stanley Rabinowitz and Stan Wagon in the 
 paper ["A Spigot Algorithm for the Digits of Pi"](https://www.maa.org/sites/default/files/pdf/pubs/amm_supplements/Monthly_Reference_12.pdf).
 
-I am *not* a mathematician, so I don't understand why this algorithm works :-) but that doesn't prevent me (or anyone else) to 
-implement it!
+I am *not* a mathematician, so I don't understand why this algorithm works :-) but that doesn't prevent me (or anyone else) from 
+implementing it!
 
 ## Compiling
 I am using the [PiDP-8/I](https://obsolescence.wixsite.com/obsolescence/pidp-8) for my PDP-8 work as I don't have the money nor the space for a real PDP-8, unfortunately.
-Anyway, procedures should be the same.
+Anyway, procedures should be the same for compiling and executing the program.
 
 ### Get the source code on your PiDP-8/I system
 Some familiarity with the handling of the PiDP-8/I and simh in general is assumed.
@@ -21,7 +21,7 @@ I won't describe the details, but several options can be used:
 * Use USB sticks with the files, and use the PiDP-8/I options to mount the file as a paper tape; and
 as before, use PIP to transfer files.
 
-Whatever method, you should end up with the two files SPIGOT.FT and PRTDIG.FT on the OS/8 file system.
+Whatever method you use, you should end up with the two files `SPIGOT.FT` and `PRTDIG.FT` on the OS/8 file system.
 
 ### Compile using FORTRAN IV
 First compile the subroutine for printing:
@@ -60,7 +60,8 @@ SPIGOT PDP-8 FORTRAN IV -- BUILD 230325.1230
 1
 4
 ```
-A new digit appear with a few seconds interval.
+A new digit appears with a few seconds interval. For a 100 digits, this is about 9 minutes
+if the simh is throttled for 333K instructions per second (close to real PDP-8 CPU speed).
 The program actually also prints to the `LPT:` device, so you can capture this 
 if you want to. You can use simh and Ctrl-E to exit and make an `att lpt myprinter` followed by `go` to 
 collect the data in a file.
