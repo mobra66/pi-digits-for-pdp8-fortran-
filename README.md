@@ -40,7 +40,7 @@ And next compile the main program:
 ```
 You should end up with a `SPIGOT.RL` and a `PRTDIG.RL` file.
 ### Create a load module
-Use the FORTAN IV loader for collecting the modules.
+Use the FORTRAN IV loader for collecting the modules.
 Please NOTE that the '$' sign at the end of the line is **not** 
 to be typed in literally! You must press the ESC key instead of the ENTER key after the last 'L' in the line, which will output the '$' sign and execute the LOAD command.
 ```bash
